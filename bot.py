@@ -20,7 +20,7 @@ bot = hikari.GatewayBot(
 # Setup the arc client object
 client: arc.GatewayClient = arc.GatewayClient(bot)
 
-# client.load_extensions_from("exts")
+client.load_extensions_from("exts")
 
 @client.add_startup_hook
 async def startup_hook(client: arc.GatewayClient) -> None:
@@ -45,11 +45,12 @@ async def load_ext_slash(
     extension: arc.Option[str,
         arc.StrParams(
             "Extension to load",
-            choices={"Utils": "exts.utils", "Verification": "exts.verification", "Auto Announcement": "exts.auto_announcement"}
+            choices={"Misc": "exts.misc", "Metar": "exts.metar"}
         )
     ]
 ) -> None:
-    await ctx.respond(f"Selection: {extension}")
+    client.load_extension(extension)
+    await ctx.respond(f"Loaded {extension}")
 
 
 @client.include
@@ -64,10 +65,11 @@ async def unload_ext_slash(
     extension: arc.Option[str,
     arc.StrParams(
         "Extension to unload",
-        choices={"Utils": "exts.utils", "Verification": "exts.verification", "Auto Announcement": "exts.auto_announcement"}
+        choices={"Misc": "exts.misc", "Metar": "exts.metar"}
     )]
 ) -> None:
-    await ctx.respond(f"Selection: {extension}")
+    client.unload_extension(extension)
+    await ctx.respond(f"Unloaded: {extension}")
 
 
 @client.include
