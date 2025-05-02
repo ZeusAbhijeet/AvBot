@@ -8,12 +8,8 @@ from dotenv import load_dotenv
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
-# Setup the bot
-# I am sleepy, so I am enabling all intents. DON'T DO THIS.
-# This bot doesn't need all intents. Only requires Server Members. I am just too tired to look up which ones exactly :moai:
 bot = hikari.GatewayBot(
     token=TOKEN,
-    intents=hikari.Intents.ALL,
     allow_color=True
 )
 
