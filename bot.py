@@ -24,7 +24,7 @@ async def startup_hook(client: arc.GatewayClient) -> None:
     await client.app.update_presence(
         status=hikari.Status.ONLINE,
         activity=hikari.Activity(
-            name=f"your reactions",
+            name=f"METAR",
             type=hikari.ActivityType.WATCHING
         )
     )
